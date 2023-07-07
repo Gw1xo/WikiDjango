@@ -1,0 +1,41 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+    Add Article
+{% endblock %}
+
+{% block body %}
+{% if messages %}
+    {% for message in messages %}
+        <div{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</div>
+    {% endfor %}
+{% endif %}
+    <h1>Add Article</h1>
+    <form action="{% url 'add' %}" method="POST">
+        {% csrf_token %}
+        <div class="row">
+            <div class='col-md-1'>
+                {{ form.name.label }} 
+            </div>
+            <div class='col-md-9'>
+                {{ form.name }}
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class='col-md-1'>
+                {{ form.markdown.label }} 
+            </div>
+            <div class='col-md-9'>
+                {{ form.markdown }}
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class='col-md-3'></div>
+            <div class='col-md-6'>
+                <input type="submit" value="Add article" class="form-control">
+            </div>
+        </div>
+    </form>
+{% endblock %}
